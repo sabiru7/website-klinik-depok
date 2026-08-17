@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>KlinikaCare — Klinik Kesehatan Terpercaya</title>
-
+    <link rel="shortcut icon" type="image/png" href="/modern/src/assets/images/logos/favicon.png" />
     <meta
         name="description"
         content="KlinikaCare menyediakan layanan kesehatan profesional untuk Anda dan keluarga."
@@ -95,37 +95,27 @@
 
             <!-- LOGO -->
 
-            <a href="#beranda" class="flex items-center gap-3">
+        <a href="#beranda" class="flex items-center gap-3">
+            <!-- Logo -->
+            <div class="flex h-11 w-11 items-center justify-center rounded-xl overflow-hidden">
+                <img
+                    src="/modern/src/assets/images/logos/favicon.png"
+                    alt="Logo"
+                    class="h-full w-full object-cover"
+                >
+            </div>
 
-                <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-medical-600 text-white shadow-lg shadow-medical-600/20">
-
-                    <svg
-                        class="h-6 w-6"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            d="M12 5v14M5 12h14"
-                        />
-                    </svg>
-
+            <!-- Text -->
+            <div>
+                <div class="text-lg font-extrabold tracking-tight text-[#102a43]">
+                    KlinikCare<span class="text-medical-600">Depok</span>
                 </div>
 
-                <div>
-                    <div class="text-lg font-extrabold tracking-tight text-[#102a43]">
-                        Klinika<span class="text-medical-600">Care</span>
-                    </div>
-
-                    <div class="text-[9px] font-semibold uppercase tracking-[.2em] text-slate-400">
-                        Healthcare Center
-                    </div>
+                <div class="text-[9px] font-semibold uppercase tracking-[.2em] text-slate-400">
+                    Healthcare Center
                 </div>
-
-            </a>
-
+            </div>
+        </a>
 
             <!-- DESKTOP MENU -->
 
@@ -273,7 +263,7 @@
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
 
                     <a
-                        href="#appointment"
+                        href="appointment"
                         class="inline-flex items-center justify-center gap-2 rounded-lg bg-medical-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-medical-600/20 hover:bg-medical-700"
                     >
 
@@ -1008,29 +998,29 @@
             </div>
 
 
-            <div class="flex flex-col gap-3 sm:flex-row">
-
-                <a
-                    href="/appointment"
-                    class="rounded-lg bg-medical-500 px-7 py-3.5 text-center text-sm font-bold text-white hover:bg-medical-400"
+                    <div class="flex flex-col gap-3 sm:flex-row">
+            <a
+                href="https://wa.me/6282112461434"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Buat Janji Online melalui WhatsApp"
+                class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-7 py-3.5 text-center text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-[#20bd5a] hover:shadow-lg"
+            >
+                <!-- Logo WhatsApp -->
+                <svg
+                    class="h-5 w-5 shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
                 >
-                    Buat Janji Online
-                </a>
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.198.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.372.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                </svg>
 
-                <a
-                    href="https://wa.me/6282112461434"
-                    target="_blank"
-                    class="rounded-lg border border-white/20 px-7 py-3.5 text-center text-sm font-bold text-white hover:bg-white/10"
-                >
-                    WhatsApp Kami
-                </a>
-
-            </div>
-
+                <span>Buat Janji Online</span>
+            </a>
         </div>
-
+        </div>
     </div>
-
 </section>
 
 
@@ -1315,21 +1305,11 @@
 <!-- FLOATING WHATSAPP -->
 <!-- ===================================================== -->
 
-<a
-    href="https://wa.me/6282112461434"
-    target="_blank"
-    aria-label="WhatsApp"
-    class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-105"
->
-
-    <svg
-        class="h-7 w-7"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-    >
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.198.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-    </svg>
-
+<a href="https://wa.me/6282112461434"
+target="_blank" aria-label="WhatsApp"
+class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition hover:scale-105" > <svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" >
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.198.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+ </svg>
 </a>
 
 </body>

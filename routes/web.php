@@ -14,4 +14,5 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('pasien', App\Http\Controllers\PasienController::class);
     Route::resource('poli', App\Http\Controllers\PoliController::class);
     Route::resource('daftar', App\Http\Controllers\DaftarController::class);
+    Route::resource('users', App\Http\Controllers\UsersController::class);
 });

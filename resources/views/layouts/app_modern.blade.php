@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? '' }}</title>
-    <link rel="shortcut icon" type="image/png" href="https://i.pinimg.com/1200x/a5/05/72/a50572eb4a410caeb2b9ac983c551a04.jpg" />
+    <link rel="shortcut icon" type="image/png" href="/modern/src/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="/modern/src/assets/css/styles.min.css" />
 </head>
 
