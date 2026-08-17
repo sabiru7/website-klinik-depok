@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Sabil',
-            'email' => 'sakadev@gmail.com',
-            'password' => bcrypt('sabileka1'),
+            'email' => 'admin@klinik.com',
+            'password' => bcrypt('admin1234'),
         ]);
 
         $this->call(PasienSeeder::class);
