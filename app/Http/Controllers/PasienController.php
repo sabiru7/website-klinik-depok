@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Pasien;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PasienController extends Controller
 {
@@ -13,12 +15,13 @@ class PasienController extends Controller
     public function index()
     {
         if (request()->has('q')) {
-            $pasien = \App\Models\Pasien::search(request('q'))->paginate(10);
+            $pasien = Pasien::search(request('q'))->paginate(10);
         } else {
-            $pasien = \App\Models\Pasien::latest()->paginate(10);
+            $pasien = Pasien::latest()->paginate(10);
         }
 
         $data['pasien'] = $pasien;
+
         return view('pasien_index', $data);
     }
 
@@ -43,19 +46,24 @@ class PasienController extends Controller
             'alamat'        => 'nullable',
             'foto'          => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $pasien = new \App\Models\Pasien();
+
+        $pasien = new Pasien();
         $pasien->no_pasien = $requestData['no_pasien'];
         $pasien->nama = $requestData['nama'];
         $pasien->umur = $requestData['umur'];
         $pasien->jenis_kelamin = $requestData['jenis_kelamin'];
         $pasien->alamat = $requestData['alamat'];
+
         if ($request->hasFile('foto')) {
-            $fotoName = time().'.'.$request->foto->extension();
+            $fotoName = time() . '.' . $request->foto->extension();
             $request->file('foto')->storeAs('public/images', $fotoName);
             $pasien->foto = $fotoName;
         }
+
         $pasien->save();
-        return redirect('/pasien')->with('pesan', 'Data sudah disimpan');
+
+        return redirect('/pasien')
+            ->with('pesan', 'Data sudah disimpan');
     }
 
     /**
@@ -71,7 +79,8 @@ class PasienController extends Controller
      */
     public function edit(string $id)
     {
-        $data['pasien'] = \App\Models\Pasien::findOrFail($id);
+        $data['pasien'] = Pasien::findOrFail($id);
+
         return view('pasien_edit', $data);
     }
 
@@ -88,23 +97,31 @@ class PasienController extends Controller
             'alamat'        => 'nullable',
             'foto'          => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $pasien = \App\Models\Pasien::findOrFail($id);
+
+        $pasien = Pasien::findOrFail($id);
+
         $pasien->no_pasien = $requestData['no_pasien'];
         $pasien->nama = $requestData['nama'];
         $pasien->umur = $requestData['umur'];
         $pasien->jenis_kelamin = $requestData['jenis_kelamin'];
         $pasien->alamat = $requestData['alamat'];
+
         if ($request->hasFile('foto')) {
-            $fotoName = time().'.'.$request->foto->extension();
+            $fotoName = time() . '.' . $request->foto->extension();
+
             $request->file('foto')->storeAs('public/images', $fotoName);
-            $Image = str_replace('/storage', '', $pasien->foto);
-            if(Storage::exists('public/images/' . $Image)){
-                Storage::delete('/public/images/' . $Image);
+
+            if ($pasien->foto) {
+                Storage::delete('public/images/' . $pasien->foto);
             }
+
             $pasien->foto = $fotoName;
         }
+
         $pasien->save();
-        return redirect('/pasien')->with('pesan', 'Data sudah diubah');
+
+        return redirect('/pasien')
+            ->with('pesan', 'Data sudah diubah');
     }
 
     /**
@@ -112,8 +129,29 @@ class PasienController extends Controller
      */
     public function destroy(string $id)
     {
-        $pasien = \App\Models\Pasien::findOrFail($id);
+        $pasien = Pasien::findOrFail($id);
+
+        if ($pasien->foto) {
+            Storage::delete('public/images/' . $pasien->foto);
+        }
+
         $pasien->delete();
-        return redirect('/pasien')->with('pesan', 'Data sudah dihapus');
+
+        return redirect('/pasien')
+            ->with('pesan', 'Data sudah dihapus');
+    }
+
+    /**
+     * Cetak laporan pasien dalam bentuk PDF.
+     */
+    public function cetakPdf()
+    {
+        $pasien = Pasien::orderBy('nama', 'ASC')->get();
+
+        $pdf = Pdf::loadView('pasien_laporan', [
+            'pasien' => $pasien
+        ]);
+
+        return $pdf->download('laporan-data-pasien.pdf');
     }
 }

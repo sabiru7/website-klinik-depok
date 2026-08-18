@@ -8,64 +8,92 @@ use Illuminate\Http\Request;
 class DaftarController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar pendaftaran.
      */
     public function index()
     {
-        if (request()->has('q')) {
-            $daftar = \App\Models\Daftar::search(request('q'))->paginate(20);
+        if (request()->has('q') && request('q') != '') {
+
+            $daftar = Daftar::with('pasien')
+                ->search(request('q'))
+                ->paginate(20);
+
         } else {
-            $daftar = \App\Models\Daftar::with('pasien')->latest()->paginate(20);
+
+            $daftar = Daftar::with('pasien')
+                ->latest()
+                ->paginate(20);
         }
-        
+
         return view('daftar_index', compact('daftar'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Menampilkan form tambah pendaftaran.
      */
     public function create()
     {
-        //
+        return view('daftar_create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data pendaftaran.
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->validate([
+            'pasien_id' => 'required',
+        ]);
+
+        Daftar::create($requestData);
+
+        return redirect('/daftar')
+            ->with('pesan', 'Data pendaftaran berhasil disimpan');
     }
 
     /**
-     * Display the specified resource.
+     * Menampilkan detail pendaftaran.
      */
     public function show(Daftar $daftar)
     {
-        //
+        $daftar->load('pasien');
+
+        return view('daftar_show', compact('daftar'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Menampilkan form edit.
      */
     public function edit(Daftar $daftar)
     {
-        //
+        $daftar->load('pasien');
+
+        return view('daftar_edit', compact('daftar'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Mengubah data pendaftaran.
      */
     public function update(Request $request, Daftar $daftar)
     {
-        //
+        $requestData = $request->validate([
+            'pasien_id' => 'required',
+        ]);
+
+        $daftar->update($requestData);
+
+        return redirect('/daftar')
+            ->with('pesan', 'Data pendaftaran berhasil diubah');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data pendaftaran.
      */
     public function destroy(Daftar $daftar)
     {
-        //
+        $daftar->delete();
+
+        return redirect('/daftar')
+            ->with('pesan', 'Data pendaftaran berhasil dihapus');
     }
 }

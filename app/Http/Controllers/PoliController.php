@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poli;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class PoliController extends Controller
 {
@@ -12,8 +13,10 @@ class PoliController extends Controller
      */
     public function index()
     {
-        $poli = \App\Models\Poli::orderBy('nama', 'ASC')->paginate(10);
+        $poli = Poli::orderBy('nama', 'ASC')->paginate(10);
+
         $data['poli'] = $poli;
+
         return view('poli_index', $data);
     }
 
@@ -31,13 +34,15 @@ class PoliController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->validate([
-            'nama'          => 'required',
-            'biaya'         => 'required|numeric',
+            'nama'  => 'required',
+            'biaya' => 'required|numeric',
         ]);
-        $poli = new \App\Models\Poli();
+
+        $poli = new Poli();
         $poli->nama = $requestData['nama'];
         $poli->biaya = $requestData['biaya'];
         $poli->save();
+
         return redirect('/poli')->with('pesan', 'Data sudah disimpan');
     }
 
@@ -54,7 +59,8 @@ class PoliController extends Controller
      */
     public function edit(string $id)
     {
-        $data['poli'] = \App\Models\Poli::findOrFail($id);
+        $data['poli'] = Poli::findOrFail($id);
+
         return view('poli_edit', $data);
     }
 
@@ -64,13 +70,15 @@ class PoliController extends Controller
     public function update(Request $request, string $id)
     {
         $requestData = $request->validate([
-            'nama'          => 'required|min:2',
-            'biaya'          => 'required|numeric',
+            'nama'  => 'required|min:2',
+            'biaya' => 'required|numeric',
         ]);
-        $poli = \App\Models\Poli::findOrFail($id);
+
+        $poli = Poli::findOrFail($id);
         $poli->nama = $requestData['nama'];
         $poli->biaya = $requestData['biaya'];
         $poli->save();
+
         return redirect('/poli')->with('pesan', 'Data sudah diubah');
     }
 
@@ -79,8 +87,23 @@ class PoliController extends Controller
      */
     public function destroy(string $id)
     {
-        $poli = \App\Models\Poli::findOrFail($id);
+        $poli = Poli::findOrFail($id);
         $poli->delete();
+
         return redirect('/poli')->with('pesan', 'Data sudah dihapus');
     }
+
+    /**
+     * Cetak laporan PDF.
+     */
+    public function cetakPdf()
+{
+    $poli = Poli::orderBy('nama', 'ASC')->get();
+
+    $pdf = Pdf::loadView('poli_laporan', [
+        'poli' => $poli
+    ]);
+
+    return $pdf->download('laporan-data-poli.pdf');
+}
 }

@@ -12,6 +12,10 @@
                             </div>
                             <div class="col-md-6">
                                 <a href="/poli/create" class="btn btn-primary btn-sm float-end">Tambah Poli</a>
+                               <a href="{{ route('poli.cetakPdf') }}"
+   class="btn btn-danger btn-sm float-end me-2">
+    <i class="bi bi-file-pdf"></i> Laporan PDF
+</a>
                             </div>
                         </div>
                         <table class="table table-striped">
@@ -23,6 +27,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($poli as $item)
                                     <tr>

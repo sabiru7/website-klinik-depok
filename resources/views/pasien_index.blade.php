@@ -17,7 +17,11 @@
                                 </form>
                             </div>
                             <div class="col-md-3">
-                                <a href="/pasien/create" class="btn btn-primary btn-md float-end">Tambah Pasien</a>
+                                <a href="/pasien/create" class="btn btn-primary btn-sm float-end">Tambah Pasien</a>
+                                <a href="{{ route('pasien.cetakPdf') }}"
+   class="btn btn-danger btn-sm float-end me-2">
+    <i class="bi bi-file-pdf"></i> Laporan PDF
+</a>
                             </div>
                         </div>
                         <table class="table table-striped table-bordered">
