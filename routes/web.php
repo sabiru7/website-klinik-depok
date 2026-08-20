@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PoliController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\DaftarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,3 +23,6 @@ Route::get('/laporan-poli', [PoliController::class, 'cetakPdf'])
 
 Route::get('/laporan-pasien', [PasienController::class, 'cetakPdf'])
     ->name('pasien.cetakPdf');
+
+Route::get('/laporan-daftar', [DaftarController::class, 'cetakPdf'])
+    ->name('daftar.cetakPdf');

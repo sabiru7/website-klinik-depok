@@ -45,17 +45,12 @@
                         </div>
 
                         <div class="col-md-3">
-
-                            {{-- Tombol Tambah --}}
-                            <a
-                                href="/daftar/create"
-                                class="btn btn-primary btn-md float-end">
-
-                                Tambah Pendaftaran
-
-                            </a>
-
-                        </div>
+                                <a href="/daftar/create" class="btn btn-primary btn-sm float-end">Tambah Pasien</a>
+                                <a href="{{ route('daftar.cetakPdf') }}"
+   class="btn btn-danger btn-sm float-end me-2">
+    <i class="bi bi-file-pdf"></i> Laporan PDF
+</a>
+                            </div>
 
                     </div>
 

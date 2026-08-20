@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Daftar;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DaftarController extends Controller
 {
@@ -96,4 +97,18 @@ class DaftarController extends Controller
         return redirect('/daftar')
             ->with('pesan', 'Data pendaftaran berhasil dihapus');
     }
+
+    public function cetakPdf()
+{
+    $daftar = Daftar::with(['pasien', 'poli'])
+        ->orderBy('tanggal_daftar', 'desc')
+        ->get();
+
+    $pdf = Pdf::loadView('daftar_laporan', compact('daftar'));
+
+    $pdf->setPaper('A4', 'landscape');
+
+    return $pdf->download('laporan-daftar-pasien.pdf');
 }
+}
+
