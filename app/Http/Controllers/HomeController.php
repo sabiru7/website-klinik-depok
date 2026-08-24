@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pasien;
+use App\Models\Daftar;
+use App\Models\Poli;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +27,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // ==========================
+        // JUMLAH DATA
+        // ==========================
+
+        $jumlahPasien = Pasien::count();
+
+        $jumlahDaftar = Daftar::count();
+
+        $jumlahPoli = Poli::count();
+
+
+        // ==========================
+        // PASIEN TERBARU
+        // ==========================
+
+        $pasien = Pasien::latest()
+            ->take(5)
+            ->get();
+
+
+        // ==========================
+        // PENDAFTARAN TERBARU
+        // ==========================
+
+        $daftar = Daftar::with('pasien')
+            ->latest()
+            ->take(5)
+            ->get();
+
+
+        // ==========================
+        // KIRIM DATA KE VIEW
+        // ==========================
+
+        return view('home', compact(
+            'jumlahPasien',
+            'jumlahDaftar',
+            'jumlahPoli',
+            'pasien',
+            'daftar'
+        ));
     }
 }
